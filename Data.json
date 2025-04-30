@@ -1,0 +1,56 @@
+{
+  "recipes": [
+    {
+      "id": 1,
+      "name": "Thai Basil Tofu Stir Fry",
+      "cuisine": "Thai",
+      "diet": ["Egg Free", "Dairy Free"],
+      "prepTime": "20 minutes",
+      "likes": 35,
+      "rating": 4,
+      "image": "https://images.unsplash.com/photo-1607532941433-304659e8198a?auto=format&fit=crop&w=800&q=80",
+      "instructions": [
+        "Press and cube the tofu.",
+        "Heat oil in a pan and fry the tofu until golden.",
+        "Add garlic, chili, and bell peppers. Sauté for 2 minutes.",
+        "Add soy sauce, sugar, and Thai basil leaves.",
+        "Stir well and cook for another 2-3 minutes before serving."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Kung Pao Shrimp",
+      "cuisine": "Chinese",
+      "diet": [],
+      "prepTime": "30 minutes",
+      "likes": 25,
+      "rating": 3,
+      "image": "assets/kung-pao.jpg",
+      "instructions": [
+        "Marinate shrimp with soy sauce and cornstarch for 10 minutes.",
+        "Stir-fry peanuts, chili peppers, and garlic in oil.",
+        "Add shrimp and cook until pink.",
+        "Add sauce (soy, vinegar, sugar) and simmer until thick.",
+        "Serve hot with rice or noodles."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Mexican Chicken",
+      "cuisine": "Mexican",
+      "diet": ["Gluten Free"],
+      "prepTime": "40 minutes",
+      "likes": 80,
+      "rating": 5,
+      "image": "assets/mexican-chicken.jpg",
+      "instructions": [
+        "Season chicken with cumin, chili powder, and salt.",
+        "Sear the chicken in a hot skillet until browned.",
+        "Add chopped tomatoes, onions, and garlic.",
+        "Simmer for 25 minutes until chicken is cooked through.",
+        "Serve with rice or warm tortillas."
+      ]
+    }
+
+  ]
+}

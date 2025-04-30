@@ -1,0 +1,14 @@
+
+<div *ngFor="let recipe of allrecipes">
+
+  <div class="recipe-card">
+    <img [src]="recipe.image" alt="{{ recipe.name }}">
+    <h3>{{ recipe.name }}</h3>
+    <p>{{ recipe.prepTime }}</p>
+    <p>{{ recipe.likes }}</p>
+    <p>{{ recipe.rating }}</p>
+    <p>{{ detai l}}</p>
+    <a [routerLink]="['/recipes', recipe.id]" class="btn btn-primary">View Recipe</a>
+  </div>
+</div>
+
