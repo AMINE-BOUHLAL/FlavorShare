@@ -8,14 +8,15 @@ import {RouterLink} from '@angular/router';
   selector: 'app-accueil',
   imports: [
     NgForOf,
-    RouterLink,
-    //   convert JS TO JSON  FOR DEBUG
-  ],
+    RouterLink,],
+
+
   templateUrl: './accueil.component.html',
+  standalone: true,
   styleUrl: './accueil.component.css'
 })
 export class AccueilComponent implements OnInit{
-  allrecipes?: Recipe[];
+  allrecipes: Recipe[] =[];
   constructor(private recipe : RecipeService) {}
 
 

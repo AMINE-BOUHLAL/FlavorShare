@@ -1,30 +1,27 @@
 import {Component, OnInit} from '@angular/core';
 import {RecipeService} from '../recipe.service';
 import {Recipe} from '../Models/recipe.model';
-import {NgForOf} from '@angular/common';
+import {CommonModule, NgForOf} from '@angular/common';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-detail',
-  imports: [
-    NgForOf
-  ],
   templateUrl: './detail.component.html',
-  styleUrl: './detail.component.css'
+  styleUrls: ['./detail.component.css'],
+  standalone: true,
+  imports: [CommonModule],
 })
-export class DetailComponent implements OnInit{
+export class DetailsComponent implements OnInit {
+  recipe: Recipe | undefined;
 
-  constructor(private recipe : RecipeService) {}
-allrecipes: Recipe[]=[];
-  recipesfilter: Recipe[]=[];
+  constructor(
+    private route: ActivatedRoute,
+    private recipeService: RecipeService
+  ) {}
 
   ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.recipeService.getbyid(id).subscribe(rec=>{this.recipe=rec});
   }
-  Details(){
-    this.recipe.getRecipes().subscribe(rec=>this.allrecipes=rec)
-
-  }
-
-
-
-
 }
+

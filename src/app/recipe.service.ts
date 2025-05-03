@@ -7,11 +7,20 @@ import {Recipe} from './Models/recipe.model';
   providedIn: 'root'
 })
 export class RecipeService {
-  private apiUrl ='http://localhost:3001/recipes'
+  private apiUrl ='http://localhost:3000/recipes'
+
 
   constructor(private httpclient : HttpClient) { }
   getRecipes():Observable<Recipe[]>{
-    return this.httpclient.get<Recipe[]>(this.apiUrl)
+    return this.httpclient.get<Recipe[]>(this.apiUrl);
+  }
+  getbyid(id:number): Observable<Recipe>{
+    return this.httpclient.get<Recipe>(`${this.apiUrl}/${id}`);
   }
 
+  createRecette(recipe:Recipe): Observable<Recipe> {
+    return this.httpclient.post<Recipe>(this.apiUrl, recipe);
   }
+
+
+}

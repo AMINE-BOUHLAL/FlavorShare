@@ -1,14 +1,113 @@
+<head>
+  <style>
+  /* Custom CSS */
+  .recipe-card {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
 
-<div *ngFor="let recipe of allrecipes">
+  .recipe-image {
+    flex: 0 0 40%;
+    max-height: 400px;
+    overflow: hidden;
+  }
 
-  <div class="recipe-card">
-    <img [src]="recipe.image" alt="{{ recipe.name }}">
-    <h3>{{ recipe.name }}</h3>
-    <p>{{ recipe.prepTime }}</p>
-    <p>{{ recipe.likes }}</p>
-    <p>{{ recipe.rating }}</p>
-    <p>{{ detai l}}</p>
-    <a [routerLink]="['/recipes', recipe.id]" class="btn btn-primary">View Recipe</a>
+  .recipe-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .recipe-info {
+    flex: 0 0 60%;
+    padding: 25px;
+  }
+
+  .recipe-info h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f8a100;
+    padding-bottom: 10px;
+  }
+
+  .recipe-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .recipe-detail {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 6px;
+  }
+
+  .recipe-detail strong {
+    color: #f8a100;
+  }
+
+  .recipe-instructions {
+    line-height: 1.6;
+    color: #555;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .recipe-card {
+      flex-direction: column;
+    }
+
+    .recipe-image, .recipe-info {
+      flex: 0 0 100%;
+    }
+
+    .recipe-details {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12" *ngIf="recipe">
+      <div class="recipe-card">
+        <!-- Left side: Image -->
+        <div class="recipe-image">
+          <img [src]="recipe.image" alt="{{ recipe.name }}">
+        </div>
+
+        <!-- Right side: Recipe information -->
+        <div class="recipe-info">
+          <h3>{{ recipe.name }}</h3>
+
+          <!-- Grid layout for recipe details -->
+          <div class="recipe-details">
+            <div class="recipe-detail">
+              <strong>Prep Time:</strong> {{ recipe.prepTime }}
+            </div>
+            <div class="recipe-detail">
+              <strong>Likes:</strong> {{ recipe.likes }}
+            </div>
+            <div class="recipe-detail">
+              <strong>Rating:</strong> {{ recipe.rating }}
+            </div>
+          </div>
+
+          <!-- Recipe instructions -->
+          <div class="recipe-instructions">
+            <strong>Instructions:</strong>
+            <p>{{ recipe.instructions }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-

@@ -1,0 +1,282 @@
+<style>
+  /* General Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  /* Form Section */
+  .recipe-form-section {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #222;
+  }
+
+  /* Form Styling */
+  .recipe-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #222;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .form-group input[type="file"] {
+    padding: 10px 0;
+  }
+
+  .form-group select[multiple] {
+    height: 100px;
+    padding: 10px;
+  }
+
+  .form-group input[type="number"] {
+    -moz-appearance: textfield; /* Remove spinners in Firefox */
+  }
+
+  .form-group input[type="number"]::-webkit-outer-spin-button,
+  .form-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Remove spinners in Chrome/Safari */
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto 0;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .form-group .error {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none;
+  }
+
+  .form-group input:invalid[required]:focus ~ .error,
+  .form-group textarea:invalid[required]:focus ~ .error,
+  .form-group select:invalid[required]:focus ~ .error {
+    display: block;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .recipe-form {
+      padding: 20px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+
+    .btn-primary {
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .section-title {
+      font-size: 1.8rem;
+    }
+
+    .container {
+      padding: 0 10px;
+    }
+  }
+</style>
+
+<section class="recipe-form-section">
+  <div class="container">
+    <h2 class="section-title">Ajouter une Nouvelle Recette</h2>
+    <form class="recipe-form" #recipeForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Nom de la Recette</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="recipe.name"
+          required
+          placeholder="Entrez le nom de la recette"
+        >
+        <div class="error">Le nom de la recette est requis.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="cuisine">Cuisine</label>
+        <input
+          type="text"
+          id="cuisine"
+          name="cuisine"
+          [(ngModel)]="recipe.cuisine"
+          required
+          placeholder="Ex: Italienne, Marocaine, Asiatique"
+        >
+        <div class="error">La cuisine est requise.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="diet">Régime Alimentaire</label>
+        <select
+          id="diet"
+          name="diet"
+          [(ngModel)]="recipe.diet"
+          multiple
+          required
+        >
+          <option value="Gluten Free">Sans Gluten</option>
+          <option value="Dairy Free">Sans Lait</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Vegetarian">Végétarien</option>
+          <option value="Keto">Keto</option>
+          <option value="Low Carb">Faible en Glucides</option>
+        </select>
+        <div class="error">Au moins un régime doit être sélectionné.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="prepTime">Temps de Préparation</label>
+        <input
+          type="text"
+          id="prepTime"
+          name="prepTime"
+          [(ngModel)]="recipe.prepTime"
+          required
+          placeholder="Ex: 20 minutes"
+        >
+        <div class="error">Le temps de préparation est requis.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="likes">Nombre de Likes</label>
+        <input
+          type="number"
+          id="likes"
+          name="likes"
+          [(ngModel)]="recipe.likes"
+          required
+          min="0"
+          placeholder="Ex: 0"
+        >
+        <div class="error">Le nombre de likes est requis.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="rating">Note (0 à 5)</label>
+        <input
+          type="number"
+          id="rating"
+          name="rating"
+          [(ngModel)]="recipe.rating"
+          required
+          min="0"
+          max="5"
+          step="0.1"
+          placeholder="Ex: 4"
+        >
+        <div class="error">La note est requise (0 à 5).</div>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Image de la Recette</label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          accept="image/*"
+          (change)="onFileChange($event)"
+          required
+        >
+        <div class="error">Une image est requise.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="instructions">Instructions</label>
+        <textarea
+          id="instructions"
+          name="instructions"
+          [(ngModel)]="recipe.instructions"
+          required
+          placeholder="Décrivez les étapes de préparation"
+        ></textarea>
+        <div class="error">Les instructions sont requises.</div>
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="!recipeForm.valid">Ajouter la Recette</button>
+    </form>
+  </div>
+</section>
