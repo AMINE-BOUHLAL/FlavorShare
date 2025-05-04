@@ -18,7 +18,17 @@ export class RecipeService {
     return this.httpclient.get<Recipe>(`${this.apiUrl}/${id}`);
   }
 
-  createRecette(recipe:Recipe): Observable<Recipe> {
+  createRecette(recipe: {
+    id: undefined;
+    name: string;
+    cuisine: string;
+    diet: string[];
+    prepTime: string;
+    likes: number;
+    rating: number;
+    image: string;
+    instructions: string
+  }): Observable<Recipe> {
     return this.httpclient.post<Recipe>(this.apiUrl, recipe);
   }
 

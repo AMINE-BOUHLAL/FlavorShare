@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../Models/recipe.model';
+import { Router } from '@angular/router'; // Add Router for navigation
 
 @Component({
   selector: 'app-add-form',
@@ -12,7 +13,7 @@ import { Recipe } from '../Models/recipe.model';
 })
 export class AddFormComponent {
   recipe: Recipe = {
-    id: 0, // Will be set by the backend
+    id: undefined, // Do not set id; let backend handle it
     name: '',
     cuisine: '',
     diet: [],
@@ -23,19 +24,10 @@ export class AddFormComponent {
     instructions: ''
   };
 
-  constructor(private recipeService: RecipeService) {}
-
-  onFileChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.recipe.image = reader.result as string; // Base64 string
-      };
-      reader.readAsDataURL(file);
-    }
-  }
+  constructor(
+    private recipeService: RecipeService,
+    private router: Router // Inject Router
+  ) {}
 
   onSubmit(): void {
     if (!this.recipe.name || !this.recipe.cuisine || !this.recipe.diet.length || !this.recipe.prepTime || !this.recipe.instructions || !this.recipe.image) {
@@ -43,10 +35,15 @@ export class AddFormComponent {
       return;
     }
 
-    this.recipeService.createRecette(this.recipe).subscribe({
+    // Create a new object without the id field
+    const recipeToSend = { ...this.recipe, id: undefined };
+
+    this.recipeService.createRecette(recipeToSend).subscribe({
       next: (createdRecipe: Recipe) => {
         alert('Recette ajoutée avec succès !');
         this.resetForm();
+        // Navigate to the details page with the new recipe's id
+        this.router.navigate(['/details', createdRecipe.id]);
       },
       error: (error: any) => {
         console.error('Erreur lors de l\'ajout de la recette:', error);
@@ -57,7 +54,7 @@ export class AddFormComponent {
 
   private resetForm(): void {
     this.recipe = {
-      id: 0,
+      id: undefined, // Ensure id is undefined for new submissions
       name: '',
       cuisine: '',
       diet: [],
